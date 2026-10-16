@@ -1,0 +1,23 @@
+{
+  "created_at": "2026-10-16T15:27:28+08:00",
+  "artifact": "GKM-Windows-x64.zip",
+  "size_bytes": 217479226,
+  "sha256": "fce6861dc4ae75e4fb3f63ae00a3bb4e5522e2a2d4cfda68b287612245f35d77",
+  "manifest_files_verified": 5383,
+  "all_app_sources_match_current_checkout": true,
+  "pe_machine": "AMD64",
+  "pe_subsystem": "Windows GUI",
+  "bundled_python": "3.12.10",
+  "windows_execution_verified": false,
+  "functional_tests": {
+    "passed": 52,
+    "failed": 0,
+    "skipped_windows": 2
+  },
+  "full_mock_items": 200000,
+  "post_fix_mock_items": 1000,
+  "contains_company_excel_or_real_credentials": false,
+  "fresh_business_tables_all_zero": true,
+  "contains_private_prd_or_test_article_screenshots": false,
+  "release_candidate_tag": "v0.1.0-rc.1"
+}

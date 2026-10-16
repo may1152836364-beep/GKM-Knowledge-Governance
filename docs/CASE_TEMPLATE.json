@@ -1,0 +1,11 @@
+[
+  {
+    "language": "zh",
+    "scenario": "售后",
+    "excerpt": "请在这里填入真实且获授权的文章片段，不要把示例当真实证据。",
+    "correct_recommendation": "business_verification",
+    "reason": "请填写人工判断依据",
+    "boundaries": "仅用于同一业务事实和上下文；不能推断产品已停服",
+    "author": "请填写录入人"
+  }
+]

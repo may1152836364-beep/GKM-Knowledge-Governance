@@ -1,0 +1,49 @@
+name: Windows tests and release
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-2022
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+      - name: Test and build a clean Windows package
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: ./scripts/build_windows.ps1
+      - name: Upload downloadable packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: GKM-Windows-x64
+          path: |
+            dist/GKM-Windows-x64.zip
+            dist/GKM-Source.zip
+            dist/SHA256SUMS.txt
+            dist/windows-tests.xml
+          if-no-files-found: error
+      - name: Publish prerelease download assets
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          $assets = @('dist/GKM-Windows-x64.zip', 'dist/GKM-Source.zip', 'dist/SHA256SUMS.txt', 'dist/windows-tests.xml')
+          gh release create $env:GITHUB_REF_NAME @assets --verify-tag --prerelease --title "GKM $env:GITHUB_REF_NAME - Windows candidate" --notes-file docs/RELEASE_NOTES.md
+          if ($LASTEXITCODE -ne 0) { throw 'Release publication failed' }
+      - name: Preserve test diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GKM-failed-test-diagnostics
+          path: dist/windows-tests.xml
+          if-no-files-found: ignore

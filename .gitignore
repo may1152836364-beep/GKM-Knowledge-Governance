@@ -1,0 +1,17 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+build/
+dist/
+*.spec
+*.db*
+*.xlsx
+*.log
+.local/
+.ruff_cache/
+*.sqlite3*
+*.dpapi
+# Private source document and synthetic article screenshot stay local.
+docs/PRD_V4.md
+docs/UI_ARTICLES.png

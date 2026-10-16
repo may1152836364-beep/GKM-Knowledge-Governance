@@ -1,0 +1,151 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "article_id",
+    "language",
+    "validity_status",
+    "affected_scope",
+    "risk_types",
+    "recommendation",
+    "risk_priority",
+    "reason_zh",
+    "evidence",
+    "missing_information",
+    "suggested_revision_zh",
+    "reference_case_ids",
+    "next_review_date",
+    "removal_justification"
+  ],
+  "properties": {
+    "article_id": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "validity_status": {
+      "enum": [
+        "confirmed_issue",
+        "suspected_issue",
+        "no_issue_found",
+        "insufficient_information"
+      ]
+    },
+    "affected_scope": {
+      "enum": [
+        "full",
+        "partial",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "risk_types": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "time_expiration",
+          "product",
+          "function",
+          "process",
+          "policy",
+          "version",
+          "contradiction"
+        ]
+      }
+    },
+    "recommendation": {
+      "enum": [
+        "keep",
+        "revise",
+        "review_removal",
+        "business_verification"
+      ]
+    },
+    "risk_priority": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "reason_zh": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "paragraph_id",
+          "quote",
+          "evidence_level",
+          "issue"
+        ],
+        "properties": {
+          "paragraph_id": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_level": {
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "issue": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "missing_information": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggested_revision_zh": {
+      "type": "string"
+    },
+    "reference_case_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_review_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "removal_justification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cannot_fix_by_revision",
+        "no_historical_use_confirmed",
+        "basis"
+      ],
+      "properties": {
+        "cannot_fix_by_revision": {
+          "type": "boolean"
+        },
+        "no_historical_use_confirmed": {
+          "type": "boolean"
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
